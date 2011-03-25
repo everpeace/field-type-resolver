@@ -1,0 +1,5 @@
+This module provides a utility which resolve a raw type(returns Class<?> object) of a given field in a given class hierarchy.
+
+<strong>How to Use:</strong>
+TODO.....
+
