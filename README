@@ -1,5 +1,38 @@
 This module provides a utility which resolve a raw type(returns Class<?> object) of a given field in a given class hierarchy.
 
-<strong>How to Use:</strong>
-TODO.....
+	FieldRawTypeResolver#resolve(Field, Class) answers:
+		// read "resolve a field type of a on TypeHyper.class in TypeVarSuper.class hierarchy".
+		resolve(fieldOf("a", TypeVarHyper.class), TypeVarSub.class); // == List.class
+		resolve(fieldOf("b", TypeVarHyper.class), TypeVarSub.class); // ==List[][][][].class
+		resolve(fieldOf("c", TypeVarSuper.class), TypeVarSub.class); // == Integer.class
+		resolve(fieldOf("c_a", TypeVarSuper.class), TypeVarSub.class); // == Integer[].class
+		resolve(fieldOf("c_a_a", TypeVarSuper.class), TypeVarSub.class); // == Integer[][].class
+		resolve(fieldOf("ld", TypeVarSuper.class), TypeVarSub.class); // == List.class
+		resolve(fieldOf("ld_a", TypeVarSuper.class), TypeVarSub.class); // == List[].class
+		resolve(fieldOf("ld_a_a", TypeVarSuper.class), TypeVarSub.class); // == List[][].class
+		resolve(fieldOf("e", TypeVarSuper.class), TypeVarSub.class); // == List.class
+		resolve(fieldOf("f", TypeVarSuper.class), TypeVarSub.class); // == List[].class
+
+	On the class hierarchy:
+		private static class TypeVarHyper<A, B> {
+			public A a;
+			public B b;
+		}
+
+		private static class TypeVarSuper<C, D, E, F> extends
+				TypeVarHyper<List<E>, F[][][]> {
+			public C c;
+			public C[] c_a;
+			public C[][] c_a_a;
+			public List<D> ld;
+			public List<D>[] ld_a;
+			public List<D>[][] ld_a_a;
+			public E e;
+			public F f;
+		}
+
+		private static class TypeVarSub extends
+				TypeVarSuper<Integer, Double, List<Integer>, List<Integer>[]> {
+		}
+
 
