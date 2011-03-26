@@ -51,11 +51,11 @@
     <distributionManagement>
         <repository>
             <id>github-personal-release</id>
-            <url>https://http://everpeace.github.com/maven-repository/release</url>
+            <url>http://everpeace.github.com/maven-repository/release</url>
         </repository>
         <snapshotRepository>
             <id>github-personal-snapshot</id>
-            <url>https://http://everpeace.github.com/maven-repository/snapshot</url>
+            <url>http://everpeace.github.com/maven-repository/snapshot</url>
         </snapshotRepository>
     </distributionManagement>
 
