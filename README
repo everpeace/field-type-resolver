@@ -1,6 +1,6 @@
-This module provides a utility which resolve a raw type(returns Class<?> object) of a given field in a given class hierarchy.
+This module provides a utility which resolve a actual type(returns Class<?> object) of a given field in a given class hierarchy.
 
-	FieldRawTypeResolver#resolve(Field, Class) answers:
+	FieldActualTypeResolver#resolve(Field, Class) answers:
 		// read "resolve a field type of a on TypeHyper.class in TypeVarSuper.class hierarchy".
 		resolve(fieldOf("a", TypeVarHyper.class), TypeVarSub.class); // == List.class
 		resolve(fieldOf("b", TypeVarHyper.class), TypeVarSub.class); // ==List[][][][].class

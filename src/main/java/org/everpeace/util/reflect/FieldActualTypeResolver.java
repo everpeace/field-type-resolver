@@ -11,27 +11,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class provides a functionality which resolves a field raw type of a
+ * This class provides a functionality which resolves a field actual type of a
  * given field in a given class hierarchy.
  * <p/>
  *
  * @author Shingo Omura <everpeace _at_ gmail _dot_ com>
  *
  */
-public class FieldRawTypeResolver {
+public class FieldActualTypeResolver {
 	// constructor is private.
-	private FieldRawTypeResolver() {
+	private FieldActualTypeResolver() {
 		// nop
 	}
 
 	/**
-	 * resolves a f's raw type in context.
+	 * resolves a f's actual type in context.
 	 *
 	 * @param f
 	 *            field
 	 * @param context
 	 *            class hierarchy
-	 * @return resolved raw type, null if cannot be resolved.
+	 * @return resolved actual type, null if cannot be resolved.
 	 */
 	public static Class<?> resolve(Field f, Class<?> context) {
 		assert f != null && context != null;
@@ -46,7 +46,7 @@ public class FieldRawTypeResolver {
 	 *            type declared on some class or field.
 	 * @param context
 	 *            type hierarchy
-	 * @return resolved raw type, null if cannot resolved
+	 * @return resolved actual type, null if cannot resolved
 	 */
 	@SuppressWarnings("unchecked")
 	private static Class<?> resolveType(Type type, Type context,
@@ -59,9 +59,9 @@ public class FieldRawTypeResolver {
 		// case of GenericArrayType (List<X>[], X[]...)
 		if (type instanceof GenericArrayType) {
 			GenericArrayType casted = (GenericArrayType) type;
-			Class<?> resolvedComponentRawType = resolveType(casted
+			Class<?> resolvedComponentActualType = resolveType(casted
 					.getGenericComponentType(), context, assignmentsOnSub);
-			return getArrayType(resolvedComponentRawType);
+			return getArrayType(resolvedComponentActualType);
 		}
 
 		// case of ParameterizedType (List<X>, Hoge<X,Y,Z> ...)
@@ -155,9 +155,9 @@ public class FieldRawTypeResolver {
 
 		// support to extended resolution for array class
 		if (context.isArray()) {
-			Class<?> resolvedRawType = resolveType(typeVar, context.getClass(),
-					assignmentsOnSub);
-			return getArrayType(resolvedRawType);
+			Class<?> resolvedActualType = resolveType(typeVar, context
+					.getClass(), assignmentsOnSub);
+			return getArrayType(resolvedActualType);
 		}
 
 		// if typeVar is declared at context, we cannot resolve.
@@ -216,7 +216,8 @@ public class FieldRawTypeResolver {
 				if (actualTypes[i] instanceof GenericArrayType) {
 					GenericArrayType casted = (GenericArrayType) actualTypes[i];
 					Type componentType = casted.getGenericComponentType();
-					return getArrayType(resolveType(componentType, context, assginmentsOnSub));
+					return getArrayType(resolveType(componentType, context,
+							assginmentsOnSub));
 				}
 
 				// case: B<T>, A extends <List<Integer>>
@@ -254,11 +255,11 @@ public class FieldRawTypeResolver {
 	}
 
 	/**
-	 * exposes a raw type of a given parameterized typpe
+	 * exposes a actual type of a given parameterized typpe
 	 *
 	 * @param type
 	 *            a parameterized type.
-	 * @return a raw type of input type, null if input type is null..
+	 * @return a actual type of input type, null if input type is null..
 	 */
 	private static Class<?> getRawType(ParameterizedType type) {
 		if (type == null)
@@ -274,19 +275,18 @@ public class FieldRawTypeResolver {
 	/**
 	 * generate Class<T[]> from Class<T>.
 	 *
-	 * @param componentRawType
+	 * @param componentClass
 	 *            Class<T> object.
 	 * @param <T>
 	 *            T
 	 * @return Class<T[]> object, null if componentRawType is null.
 	 */
 	@SuppressWarnings("unchecked")
-	private static <T> Class<T[]> getArrayType(Class<T> componentRawType) {
-		if (componentRawType == null) {
+	private static <T> Class<T[]> getArrayType(Class<T> componentClass) {
+		if (componentClass == null) {
 			return null;
 		} else {
-			return (Class<T[]>) Array.newInstance(componentRawType, 0)
-					.getClass();
+			return (Class<T[]>) Array.newInstance(componentClass, 0).getClass();
 		}
 	}
 

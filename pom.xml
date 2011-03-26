@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.everpeace.util</groupId>
-    <artifactId>field-rawtype-resolver</artifactId>
+    <artifactId>field-actualtype-resolver</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>field-rawtype-resolver</name>
-    <description>utility which resolve a raw type of a given field in a given class hierarchy.</description>
+    <name>field-actualtype-resolver</name>
+    <description>utility which resolve a actual type of a given field in a given class hierarchy.</description>
     <url>https://github.com/everpeace/field-rawtype-resolver</url>
 
     <properties>

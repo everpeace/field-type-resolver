@@ -8,11 +8,11 @@ import java.util.List;
 import org.junit.Test;
 
 /**
- * test for {@link FieldRawTypeResolver}
+ * test for {@link FieldActualTypeResolver}
  *
  * @author Shingo Omura <everpeace _at_ gmail _dot_ com>
  */
-public class FieldRawTypeResolverTest {
+public class FieldActualTypeResolverTest {
 	@Test
 	public void testWithoutTypeParameters() throws SecurityException,
 			NoSuchFieldException {
@@ -97,7 +97,7 @@ public class FieldRawTypeResolverTest {
 
 	private static <T> void assertFieldType(Field f, T obj, Class<?> expected)
 			throws SecurityException, NoSuchFieldException {
-		Class<?> resolved = FieldRawTypeResolver.resolve(f, obj.getClass());
+		Class<?> resolved = FieldActualTypeResolver.resolve(f, obj.getClass());
 		System.out.print("resolved type of field \"" + f.getName() + "\" on "
 				+ f.getDeclaringClass().getSimpleName() + " in the context of "
 				+ obj.getClass().getSimpleName() + ": ");
