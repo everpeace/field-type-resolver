@@ -1,4 +1,4 @@
-This module provides a utility which resolve a actual type(returns Class<?> object) of a given field in a given class hierarchy.
+This module provides a utility which resolve an actual type(returns Class<?> object) of a given field in a given class hierarchy.
 
 	FieldActualTypeResolver#resolve(Field, Class) answers:
 		// read "resolve a field type of a on TypeHyper.class in TypeVarSuper.class hierarchy".
